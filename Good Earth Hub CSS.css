@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<style>
+	  /* Full-width input fields */
+      * {box-sizing: border-box}
+	    input[type = text], input[type = password] {
+		  width: 90%;
+		  padding: 15px;
+		  margin: 5px 0 22px 0;
+		  display: inline-block;
+		  border: none;
+		  background: #f1f1f1;
+		}
+	  
+	  /* Sets the items in the header as a table on the same level */
+	  div.headerItems {
+	    display: table;
+		width: 100%;
+		table-layout: auto;
+	  }
+	  
+	  /* Makes all the cells even */
+	  div.headerItems span {
+		display: table-cell;
+		width: 30%;
+        text-align: center;
+        vertical-align: middle;	
+	  }
+	  
+	  /* Sets a style for the title of the page */
+	  #GEHheaderTitle {
+	    font-size: 60px;
+		font-weight: bold;
+	  }
+	  
+	  /* Add a background color when the inputs get focus */
+	  input[type = text]: focus, input[type = password]: focus {
+	    background-color: #ddd;
+		outline: none;
+	  }
+	  
+	  /* Set a style for all buttons */
+	  button {
+	    background-color: #ffffff;
+		color: black;
+		padding: 14px 15px;
+		border: 1px solid black;
+		cursor: pointer;
+		opacity: 0.9;
+	  }
+	  
+	  button: hover {
+	    opacity: 1;
+	  }
+	  
+	  /* Extra styling for the log in/sign up button */
+	  .logInSignUp {
+	    background-color: #ffffff;
+		
+	  }
+	  
+	  /* Extra styling for the cancel button*/
+	  .cancelButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the log in button */
+	  .logInButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the back button*/
+	  .backButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the sign up button */
+	  .signUpButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the sign up here button */
+	  .signUp {
+	    padding: 5px 5px;
+	    width: 30%;
+	  }
+	  
+	  /* Floats the cancel and log in buttons, adds an equal width */
+	  .cancelButton, .logInButton {
+	    float: left;
+		width: 50%;
+	  }
+	  
+	  /* Floats the back and sign up buttons, adds an equal width */
+	  .backButton, .signUpButton {
+	    float: left;
+		width: 50%;
+	  }
+	  
+	  /* Add padding to container elements */
+	  .container, .container1 {
+	    padding: 16px;
+	  }
+	  
+	  /* The modal background for the login and signup popups */
+	  .modal, .modal1 {
+	    display: none; /* Hides the modal by default */
+		position: fixed; /* Sets the modal in place */
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%;
+		overflow: auto; /* Enables scroll if needed */
+		background-color: #b3b3b3;
+		padding-top: 50px;
+		opacity: 1;
+	  }
+	  
+	  /* The modal content for the login and signup popups */
+	  .modal-content, .modal-content1 {
+	    background-color: #fefefe;
+		width: 30%;
+		border: 1px solid #888;
+		margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom 
+		and centered */
+	  }
+	  
+	  /* Style the horizontal ruler */
+	  hr {
+	    border: 1px solid #f1f1f1;
+		margin-bottom: 20px;
+	  }
+	  
+	  /* The close button (x) for the log in and sign up popup */
+	  .close {
+	    position: absolute;
+		right: 30%;
+		top: 8%;
+		font-size: 30px;
+		font-weight: bold;
+		color: #f1f1f1;
+	  }
+	  
+	  .close: hover, .close: focus {
+	    color: #f44336;
+		cursor: pointer;
+	  }
+	  
+	  .closeAll::after {
+	    content: "";
+		clear: both;
+		display: table;
+	  }
+	  
+	  .closeAll1::after {
+	    content: "";
+		clear: both;
+		display: table;
+	  }
+	  
+	  /* Styles the vision statement container so it's at the center of the page */
+	  div.ourVisionContainer {
+	    width: 50%;
+		display: block;
+		float: center;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	  }
+
+	  /* Resize the wrap to see the search bar change! */
+      div.search_wrap {
+        display: table;
+		width: 85%;
+		margin-left: 30%;
+		margin-right: auto;
+		table-layout: auto;
+		border-spacing: 10px;
+      }
+	  
+	  /* Makes all the cells even */
+	  div.search_wrap span {
+		display: table-cell;
+		width: 30%;
+        text-align: left;
+        vertical-align: middle;	
+	  }
+      
+	  /* Styles the search bar */
+      .searchTerm {      
+        padding: 5px;
+        height: 20px;
+        border-radius: 5px;      
+        color: #9DBFAF;
+      }
+      
+	  /* Styles the search button */
+      .searchButton {
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        color: #000;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 15px;
+		padding: 1px;
+		margin-top: auto;
+		margin-bottom: 2%;
+      }
+
+	  /* Styles and centers the quiz button */
+      .quiz {
+        width: 30%;
+        text-align: center;
+		margin-left: auto;
+		margin-right: auto;		
+      }
+
+	  /* Styles the blank images used as fillers for products */
+      .blank {
+	    width: 200px;
+		height: 180px;
+	  }
+	  
+	  /* Creates a scroll for products */
+	  .scrollingProducts {
+	    margin-left: auto;
+		margin-right: auto;
+		width: 60%;
+        overflow-x: scroll;
+		overflow-y: hidden;
+		white-space: nowrap;
+		padding: 40px;
+	  }
+	  
+	  /* Styles the cards (container for products) */
+	  .card {
+	    display: inline-block;
+		padding: 10px;
+	  }
+	  
+	  .quizContainer {
+	    width: 100%;
+	    text-align: center;
+	    margin-left: auto;
+	    margin-right: auto;
+	  }
+	  
+	  /* */
+	  
+	  /* */
+	  /* */
+	  /* */
+	  /* */
+	  /* */
+	  /* */
+	  
+	  
+	  /* Styles the footer */
+	  footer {
+		padding: 10px;
+	    text-align: center;
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	</style>
+  </head>
+</html>
