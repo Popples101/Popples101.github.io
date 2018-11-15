@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<style>
+	  /* Full-width input fields */
+      * {box-sizing: border-box}
+	    input[type = text], input[type = password] {
+		  width: 90%;
+		  padding: 15px;
+		  margin: 5px 0 22px 0;
+		  display: inline-block;
+		  border: none;
+		  background: #f1f1f1;
+		}
+		
+	  /* Styles the entire document */
+      * {
+	  background-color: #b8e9f7;
+	  font-family: 'Asap Condensed', sans-serif;
+	  font-size: 14pt;
+      }
+	  
+	  /* Sets the items in the header as a table on the same level */
+	  div.headerItems {
+	    display: table;
+	    width: 100%;
+	    table-layout: auto;
+	    background-color: #f1f1f1;
+	    border-radius: 20px;
+	    padding: 10px;
+	    position: relative;
+	    top: 0px;
+	  }
+	  
+	  /* Makes all the cells even */
+	  div.headerItems span {
+		display: table-cell;
+	    width: 33.3%;
+	    text-align: center;
+	    vertical-align: middle;
+	    background-color: inherit;	
+	  }
+	  
+	  /* Styles the logo */
+      #logo {
+  	    width: 200px;
+	    background-color: inherit;
+	  }
+	  
+	  /* Sets a style for the title of the page */
+	  #GEHheaderTitle {
+	    font-size: 60px;
+	    font-weight: bold;
+	  }	  
+	  
+	  /* Add a background color when the inputs get focus */
+	  input[type = text]: focus, input[type = password]: focus {
+	    background-color: #ddd;
+		outline: none;
+	  }
+	  
+	  /* Set a style for all buttons */
+	  button {
+	    background-color: #8FDD3C;
+	    color: black;
+	    padding: 14px 15px;
+	    border: 3px solid #f1f1f1;
+	    border-radius: 20px;
+	    cursor: pointer;
+	    opacity: 0.9;
+	  }
+	  
+	  button: hover {
+	    opacity: 1;
+	  }
+	  
+	  /* Extra styling for the log in/sign up button */
+	  .logInSignUp {
+	    background-color: #8FDD3C;
+		
+	  }
+	  
+	  /* Extra styling for the cancel button*/
+	  .cancelButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the log in button */
+	  .logInButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the back button*/
+	  .backButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the sign up button */
+	  .signUpButton {
+		background-color: #ffffff;
+	  }
+	  
+	  /* Extra styling for the sign up here button */
+	  .signUp {
+	    padding: 5px 5px;
+	    width: 30%;
+	  }
+	  
+	  /* Floats the cancel and log in buttons, adds an equal width */
+	  .cancelButton, .logInButton {
+	    float: left;
+		width: 50%;
+	  }
+	  
+	  /* Floats the back and sign up buttons, adds an equal width */
+	  .backButton, .signUpButton {
+	    float: left;
+		width: 50%;
+	  }
+	  
+	  /* Add padding to container elements */
+	  .container, .container1 {
+	    padding: 16px;
+	  }
+	  
+	  /* The modal background for the login and signup popups */
+	  .modal, .modal1 {
+	    display: none; /* Hides the modal by default */
+		position: fixed; /* Sets the modal in place */
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%;
+		overflow: auto; /* Enables scroll if needed */
+		background-color: #b3b3b3;
+		padding-top: 50px;
+		opacity: 1;
+	  }
+	  
+	  /* The modal content for the login and signup popups */
+	  .modal-content, .modal-content1 {
+	    background-color: #fefefe;
+		width: 30%;
+		border: 1px solid #888;
+		margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom 
+		and centered */
+	  }
+	  
+	  /* Style the horizontal ruler */
+	  hr {
+	    border: 1px solid #f1f1f1;
+		margin-bottom: 20px;
+	  }
+	  
+	  /* The close button (x) for the log in and sign up popup */
+	  .close {
+	    position: absolute;
+		right: 30%;
+		top: 8%;
+		font-size: 30px;
+		font-weight: bold;
+		color: black;
+		background-color: #b3b3b3;
+	  }
+	  
+	  .close: hover, .close: focus {
+	    color: #f44336;
+		cursor: pointer;
+	  }
+	  
+	  .closeAll::after {
+	    content: "";
+		clear: both;
+		display: table;
+	  }
+	  
+	  .closeAll1::after {
+	    content: "";
+		clear: both;
+		display: table;
+	  }
+	  
+	  /* Styles the vision statement container so it's at the center of the page */
+	  div.ourVisionContainer {
+	    width: 50%;
+		display: block;
+		float: center;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	  }
+
+	  /* Resize the wrap to see the search bar change! */
+      div.search_wrap {
+        display: table;
+		width: 85%;
+		margin-left: 30%;
+		margin-right: auto;
+		table-layout: auto;
+		border-spacing: 10px;
+      }
+	  
+	  /* Makes all the cells even */
+	  div.search_wrap span {
+		display: table-cell;
+		width: 30%;
+        text-align: left;
+        vertical-align: middle;	
+	  }
+      
+	  /* Styles the search bar */
+      .searchTerm {      
+        padding: 5px;
+        height: 20px;
+        border-radius: 5px;      
+        color: #9DBFAF;
+      }
+      
+	  /* Styles the search button */
+      .searchButton {
+        width: 50px;
+	    height: 50px;
+	    background-color: inherit;
+	    color: #000;
+	    border-radius: 5px;
+	    cursor: pointer;
+	    font-size: 15px;
+	    padding: 1px;
+	    position: relative;
+	    top: -8px;
+      }
+
+	  /* Styles and centers the quiz button */
+      .quiz {
+        width: 30%;
+        text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+        border-radius: 5px;		
+      }
+
+	  /* Styles the blank images used as fillers for products */
+      .blank {
+	    width: 200px;
+		height: 180px;
+	  }
+	  
+	  /* Creates a scroll for products */
+	  .scrollingProducts {
+	    margin-left: auto;
+		margin-right: auto;
+		width: 60%;
+        overflow-x: scroll;
+		overflow-y: hidden;
+		white-space: nowrap;
+		padding: 40px;
+	  }
+	  
+	  /* Styles the cards (container for products) */
+	  .card {
+	    display: inline-block;
+		padding: 10px;
+	  }
+	  
+	  /* Styles and centers the quiz on the homepage */
+	  .quizContainer {
+	    width: 100%;
+	    text-align: center;
+	    margin-left: auto;
+	    margin-right: auto;
+	  }
+	  
+	  	  /* Styles the modal background for all the products */
+	  .modal2, .modal3, .modal4, .modal5, .modal6, .modal7, .modal8, .modal9 {
+	    display: none; /* Hides the modal by default */
+		position: fixed; /* Sets the modal in place */
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%;
+		overflow: auto; /* Enables scroll if needed */
+		background-color: #b3b3b3;
+		padding-top: 50px;
+		
+	  }
+	  
+	  /* Styles the modal content for all the products */
+	  .modal100-content, .modal101-content, .modal102-content,
+      .modal103-content, .modal104-content, .modal105-content,
+	  .modal106-content, .modal107-content {
+	    background-color: #8FDD3C;
+		width: 40%;
+		border: 3px solid #f1f1f1;
+		margin: 5% auto auto auto; /* 5% from the top and centered */
+		border-radius: 20px;
+		text-align: center;
+	  }
+	  
+	  /* Styles the images in the buttons on the webpage */
+	  #modal100Image, #modal101Image, #modal102Image, #modal103Image,
+      #modal104Image, #modal105Image, #modal106Image, #modal107Image {
+	    width: 150px;
+		height: 150px;
+	  }
+	  
+	  /* Styles the images in the quick view pop up */
+	  #dressImage, #scarfImage, #pantsImage, #tshirtImage,
+      #skirtImage, #hatImage, #beltImage, #sweaterImage {
+	    width: 50%;
+		height: 50%;
+	  }
+
+	  /* Styles the text in the buttons on the webpage and quick view pop ups */
+	  .quickViewStyle {
+	    background-color: #8FDD3C;
+	  }
+
+	  /* Styles the footer */
+	  footer {
+		padding: 10px;
+	    text-align: center;
+	  	background-color: #f1f1f1;
+      }
+
+      footer < span {
+	    background-color: inherit;
+      }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	</style>
+  </head>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Good Earth Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
+    <style type="text/css">
+        #logo {
+            float: left;
+            border-radius: 70%;
+        }
+        
+        #title {
+            text-align: center;
+            font-size: 36pt;
+            margin-right: 80px;
+        }
+
+        #login {
+            float: right;
+            margin-top: -100px;
+        }
+
+        #mission {
+            float: left;
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+
+        .search_bar {
+            width: 100%;
+            position: relative;
+        }
+
+        .searchTerm {
+            float: left;
+            width: 100%;
+            border: 3px solid black;
+            padding: 5px;
+            height: 20px;
+            border-radius: 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
+
+        .searchTerm:focus {
+            color: black;
+        }
+
+        .searchButton {
+            position: absolute;  
+            right: -50px;
+            width: 40px;
+            height: 36px;
+            border: 1px solid black;
+            background: black;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /*Resize the wrap to see the search bar change!*/
+        .search_wrap {
+            width: 40%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .quizButton {
+            position: relative;  
+            left: -50px;
+            bottom: 30px;
+            width: 340px;
+            height: 36px;
+            border: 1px solid black;
+            background: black;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .quiz {
+            width: 30%;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-20%, 50%);
+        }
+
+         .slider {
+            padding: 5px;
+         }
+
+        .gallery {
+            position: relative;
+            padding-top: 5px;
+            top: 250px;
+            right: 57%;
+            transform: translate(55%, 50%);
+            display: flex;            
+            align-items: center;
+        }        
+
+
+        footer {
+            position: absolute;
+            float: none;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="https://dummyimage.com/100x100/000/fff" alt="GEH Logo">
+        <h1 id="title">Good Earth Hub</h1>
+        <a href="www.google.ca"><button id="login" type="button">Sign In/Sign Up</button></a>
+    </header>
+    
+    <div id="mission">
+        <p>
+            Mission Statement: 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut sem viverra aliquet eget. Ut lectus arcu bibendum at varius vel pharetra vel. Sed viverra ipsum nunc aliquet. 
+            Turpis egestas integer eget aliquet. Nibh tortor id aliquet lectus proin nibh nisl condimentum. 
+            Aliquet risus feugiat in ante metus dictum at tempor commodo. Egestas erat imperdiet sed euismod nisi porta lorem mollis. 
+            Tristique senectus et netus et malesuada fames. Bibendum est ultricies integer quis auctor elit sed vulputate.
+        </p>
+    </div>
+
+    <div class="search_wrap">
+        <div class="search_bar">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+            
+        </div>    
+     </div>
+
+     <div class="quiz">
+        <a href="www.google.ca">
+        <button type ="button" class="quizButton">Take our personalized style quiz!</button>
+        </a>
+    </div>
+
+    <div class="gallery">
+        <div class="slider">
+            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        </div>
+
+        <div class="column">
+            <a href="">
+            <img src="https://dummyimage.com/150/000/fff" alt="Clothing 1">
+            </a>
+        </div>
+
+        <div class="column">
+            <a href="">
+            <img src="https://dummyimage.com/150/4D5656/fff" alt="Clothing 1">
+            </a>
+        </div>
+
+        <div class="column">
+            <a href="">
+            <img src="https://dummyimage.com/150/626567/fff" alt="Clothing 1">
+            </a>
+        </div>
+
+        <div class="column">
+            <a href="">
+            <img src="https://dummyimage.com/150/7B7D7D/fff" alt="Clothing 1">
+            </a>
+        </div>
+
+        <div class="slider">
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+
+    </div> 
+
+    <script>
+        var slideIndex = 1;
+            showDivs(slideIndex);
+            
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+            }
+            
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("column");
+          if (n > x.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = x.length}
+              for (i = 0; i < x.length; i++) {
+                 x[i].style.display = "none";  
+          }
+              x[slideIndex-1].style.display = "block";  
+            }
+    </script>
+
+    <footer>
+        <nav>
+            <a href="">About Us</a>
+            <a href="">Learn More About Ethical Trades</a>
+            <a href="">Current Events</a>
+            <a href="">Hot Topics</a>
+        </nav>
+    </footer>
+</body>
+</html>
