@@ -108,55 +108,66 @@
 	<! Creates a search bar and search button >
 	<div class="search_wrap">
 		<! !!! added id="searchText" for input >
-		<span><input type="text" class="searchTerm" id="searchText" placeholder="What are you looking for?"></span>
-		<! !!! added id="searchSubmit" for submit >
-		<span><button type="submit" class="searchButton" id="searchSubmit" onclick="search(dataArray)"><i class="fa fa-search"></i>
-			</button></span>
+		<span>
+			<input type="text" class="searchTerm" id="searchText" placeholder="What are you looking for?">
+			<button type="submit" class="searchButton" id="searchSubmit" onclick="search(dataArray)"><i class="fa fa-search"></i>
+			</button>
+		</span>
+<!--
+		<! !!! added id="searchSubmit" for submit and id="spanSeach">
+		<span id="spanSearch"></span>
+-->
 	</div>
 
 	<! Header for the search results page >
 	<div>
 		<h1 align="center" id="searchResults">Search Results</h1>
-		
+
+		<! Sets up a side bar to filter search results >
+		<!!! moved the advanced search functions into the save div as search results>
+		<div class="advancedSearch">
+			<form>
+
+				<! Lets the user sort by newest and price >
+				<div id="sortNewPrice">
+					<h3>Sort by:</h3>
+					<select size="1" name="Sort by" id="sort">
+						<option value='alpha'>A-Z</option>
+						<option value='lowToHigh'>Price: Low to High</option>
+						<option value='highToLow'>Price: High to Low</option>
+					</select>
+				</div>
+
+				<! Lets user pick from quiz options >
+				<div class="filterOptions">
+					<h3>More Options</h3>
+
+					<! !!! added ids for each of the 4 checkboxes below >
+					<input type="checkbox" name="group1" value="Vegan" id="veganOption">Vegan
+					<input type="checkbox" name="group1" value="Canadian" id="canadianOption">Made in Canada
+					<br>
+					<input type="checkbox" name="group2" value="Casual" id="casualOption">Casual
+					<input type="checkbox" name="group2" value="Formal" id="formalOption">Formal
+				</div>
+				<br><br>
+
+				<! Lets the user hit a button to filter or reset results >
+				<div>
+					<! !!! added id and onclick function to filter so filter and search runs after click>
+					<! !!! also changed type from submit to button cuz it was having issues with onclick>
+					<button id="filterButton" type="button" onclick="search(dataArray)">Filter</button>
+					<button type="reset">Reset</button>
+					<br>
+				</div>
+			</form>
+		</div>
+
 		<! !!! added this div for the results using DOM >
 		<div id="resultCards"></div>
+
 	</div>
 
-	<! Sets up a side bar to filter search results >
-	<div class="advancedSearch">
-		<form>
 
-			<! Lets the user sort by newest and price >
-			<div id="sortNewPrice">
-				<h3>Sort by:</h3>
-				<select size="1" name="Sort by" id="sort">
-					<option value='alpha'>A-Z</option>
-					<option value='lowToHigh'>Price: Low to High</option>
-					<option value='highToLow'>Price: High to Low</option>
-				</select>
-			</div>
-
-			<! Lets user pick from quiz options >
-			<div class="filterOptions">
-				<h3>More Options</h3>
-				
-				<! !!! added ids for each of the 4 checkboxes below >
-				<input type="checkbox" name="group1" value="Vegan" id="veganOption">Vegan
-				<input type="checkbox" name="group1" value="Canadian" id="canadianOption">Made in Canada
-				<br>
-				<input type="checkbox" name="group2" value="Casual" id="casualOption">Casual
-				<input type="checkbox" name="group2" value="Formal" id="formalOption">Formal
-			</div>
-			<br><br>
-
-			<! Lets the user hit a button to filter or reset results >
-			<div>
-				<button type="submit">Filter</button>
-				<button type="reset">Reset</button>
-				<br>
-			</div>
-		</form>
-	</div>
 	<br><br><br><br><br><br><br>
 
 	<! Creates a footer with more links to Google (placeholder) >
@@ -171,8 +182,40 @@
 
 
 	<script>
-		// !!! all new until the end of the page (Nov 20 LH)
-		
+		// !!! all new until the end of the page (Nov 21 LH)
+		$(document).ready(setPrefs());
+
+		// this is for the quiz results
+		function setPrefs() {
+			let windowURL = window.location.href;
+			let url = new URL(windowURL);
+			let sty = url.searchParams.get("sty");
+			let pas = url.searchParams.get("pas");
+
+			if (sty) {
+				switch (sty) {
+					case "Casual":
+						$('#casualOption').prop('checked', true);
+						break;
+					case "Formal":
+						$('#formalOption').prop('checked', true);
+						break;
+				}
+			}
+
+			if (pas) {
+				switch (pas) {
+					case "Vegan":
+						$('#veganOption').prop('checked', true);
+						break;
+					case "Canadian":
+						$('#canadianOption').prop('checked', true);
+						break;
+				}
+			}
+
+		}
+
 		// allows search to happen after pressing enter key
 		var input = document.getElementById("searchText");
 		input.addEventListener("keyup", function(event) {
@@ -181,10 +224,11 @@
 				document.getElementById("searchSubmit").click();
 			}
 		});
-		
+
 		// data stuff
 		var data;
 		var dataArray;
+		var currentSearchArray = new Array();
 
 		// takes snapshot of database 
 		firebase.database().ref().on("value", function(snapshot) {
@@ -244,7 +288,7 @@
 
 			return result;
 		}
-		
+
 		// filtering function
 		function filter(arrayIn) {
 			var result = arrayIn;
@@ -295,32 +339,37 @@
 			var sortedArray = sort(filteredArray);
 			console.log(sortedArray);
 			$('#resultCards')[0].innerHTML = "";
+			currentSearchArray = sortedArray;
 			toDisplay(sortedArray);
 
 		}
-		
+
+
+
 		// initialization function
 		function main() {
 			collection = data['Collections']['allClothing'];
 			dataArray = Object.keys(collection).map(i => collection[i]);
 			console.log("test");
 			console.log(dataArray);
-			
+
+			search(dataArray);
+
 		}
-		
+
 		// the above code searches, filters, sorts the firebase items into an array. 
 		// The below functions take each item
 		// in the array and makes it into html elements 
 		function toDisplay(displayArray) {
 			for (var tempItem in displayArray) {
 				console.log(tempItem);
-				generateCard(displayArray[tempItem]);
+				generateCard(displayArray[tempItem], tempItem);
 			}
 		}
 
-		function generateCard(tempItem) {
+		function generateCard(tempItem, itemIndex) {
 
-			let bigButton = $('<button onclick = "generateModal(' + tempItem.name + ')"></button>');
+			let bigButton = $('<button onclick = "generateModal(' + itemIndex + ')"></button>');
 
 			let card = $('<div class = "card" id = "' + tempItem.name + '_card"></div>');
 			let name = $('<p class = "quickViewStyle">' + tempItem.name + '</p>');
@@ -333,8 +382,30 @@
 			$('#resultCards').append(card);
 
 		}
-		
-		// !!! still need to write script to generate pop up boxes
+
+		// !!! script for making the modal pop up when item is clicked
+		function generateModal(item) {
+
+			let modalDivDiv = $('<div class="modalSearch"></div>');
+			let modalDiv = $('<div class = "modal100-content"></div>');
+			let closeModal = $('<span class = "close" onclick = "removeModal()">&times;</span>');
+
+			let nameModal = $('<p class = "quickViewStyle">' + currentSearchArray[item].name + '</p>');
+			let priceModal = $('<p class = "quickViewStyle">' + currentSearchArray[item].price + '</p>');
+			let imageModal = $('<p class = "quickViewStyle"><img src = "' + currentSearchArray[item].imageurl + '" alt = "Quick View"></p>');
+			let companySite = $('<a href = "' + currentSearchArray[item].company + '" target = "_blank"  class = "quickViewStyle">View on Company Website</a>');
+
+			modalDiv.append(closeModal, nameModal, priceModal, imageModal, companySite);
+			modalDivDiv.append(modalDiv);
+			$('#resultCards').append(modalDivDiv);
+
+		}
+
+
+		//		Function to remove the modal
+		function removeModal() {
+			$('div.modalSearch').remove();
+		}
 
 	</script>
 </body>
