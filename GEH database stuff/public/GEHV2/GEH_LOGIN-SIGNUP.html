@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name = "author" content = "Shinai Sorensen"/>
+	<meta charset = "UTF-8"/>
+	<title>Good Earth Hub</title>
+	<link rel = "stylesheet" type = "text/css" href = "Login-Signup CSS.css">
+  </head>
+  
+  <body>
+	<! Creates a button, when clicked the login popup appears>
+	<div> 
+	  <button onclick = "document.getElementById('logInPopUp').style.display = 'block'"
+	  class = "logInSignUp">Log In/Sign Up</button>
+	</div>
+	
+	<! The modal that contains the log in form>
+	<div id = "logInPopUp" class = "modal">
+	  <span onclick = "document.getElementById('logInPopUp').style.display = 'none'"
+      class = "close" title = "Close">X</span>
+      <form class = "modal-content">
+        <div class = "container">
+		  <h1 align = "center">Log In</h1>
+		  <hr>
+		  <label for = "username"><b>UserName</b></label>
+		  <input type = "text" placeholder = "Enter Username" name = "username"
+		  pattern = ".{6,}" title = "Must contain 6 or more characters" required>
+		  
+		  <label for = "password"><b>Password</b></label>
+		  <input type = "password" placeholder = "Enter Password" name = "password"
+		  pattern = "(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title = "Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" required>
+		  
+		  <! Creates a button that closes the log in pop up and shows the sign up pop up>
+		  <p align = "center">If you don't have an account, 
+		  <button type = "button" class = "signUp"
+		  onclick = "document.getElementById('signUpPopUp').style.display = 'block';
+		  document.getElementById('logInPopUp').style.display = 'none'">
+		  Sign Up here</button>!</p>
+		  <hr>
+		  
+		  <div class = "closeAll">
+		    <button type = "button" 
+			onclick = "document.getElementById('logInPopUp').style.display = 'none'"
+			class = "cancelButton">Cancel</button>
+			<button type = "submit" class = "logInButton">Log In</button>
+		  </div>
+		</div>
+      </form>
+    </div>
+	
+	<! The modal that contains the sign up form>
+    <div id = "signUpPopUp" class = "modal1">
+	  <span onclick = "document.getElementById('signUpPopUp').style.display = 'none'"
+      class = "close" title = "Close">X</span>
+	  <form class = "modal-content1">
+	    <div class = "container1">
+		  <h1 align = "center">Sign Up</h1>
+		  <hr>
+		  <label for = "username"><b>UserName</b></label>
+		  <input type = "text" placeholder = "Enter Username" name = "username"
+		  pattern = ".{6,}" title = "Must contain 6 or more characters" required>
+		  
+		  <label for = "password"><b>Password</b></label>
+		  <input type = "password" placeholder = "Enter Password" name = "password"
+		  pattern = "(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title = "Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" id = "password" required>
+		  
+		  <label for = "confirmPassword"><b>Confirm Password</b></label>
+		  <input type = "password" placeholder = "Confirm Password" 
+		  name = "confirmPassword" id = "confirmPassword"
+		  title = "Must be the same as your password" required>
+		  <hr>
+		  
+		  <div class = "closeAll1">
+		    <button type = "button" 
+			onclick = "document.getElementById('signUpPopUp').style.display = 'none';
+			document.getElementById('logInPopUp').style.display = 'block'"
+			class = "backButton">Back</button>
+			<button type = "submit" class = "signUpButton">Sign Up</button>
+		  </div>
+		</div>
+	  </form>
+		</div>
+		<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD6S1QfjQHK0hqkoxfq6XvN8r0eTDbS8GQ",
+        authDomain: "geh-database.firebaseapp.com",
+        databaseURL: "https://geh-database.firebaseio.com",
+        projectId: "geh-database",
+        storageBucket: "geh-database.appspot.com",
+        messagingSenderId: "759115242784"
+    };
+        firebase.initializeApp(config);
+    </script>	
+	</body>
+	
+</html>
+
+<! Keep in mind that action = "/action_page.php" refers to form data being sent to>
+<! that page to be stored, the page contains server-side script that handles the form>
+<! data. If the action attribute is omitted, the action is set to the current page>
+
+
+
+
+
+
+

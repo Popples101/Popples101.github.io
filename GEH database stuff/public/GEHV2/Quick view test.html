@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta name = "author" content = "Michelle Le, Amy Balfour, Lucy Hu, Shinai Sorensen"/>
+	<meta charset = "UTF-8"/>
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+	
+	<title>Good Earth Hub</title>
+	
+    <! Links the CSS document for the format of the entire website >	
+    <link rel = "stylesheet" type = "text/css" href = "Good Earth Hub CSS.css">
+	
+	<! Links the icons library>
+	<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+    <style>
+	  /* The modal background for the dress1 product */
+	  .modal2 {
+	    display: none; /* Hides the modal by default */
+		position: fixed; /* Sets the modal in place */
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%;
+		overflow: auto; /* Enables scroll if needed */
+		background-color: #b3b3b3;
+		padding-top: 50px;
+		opacity: 1;
+	  }
+	  
+	  /* The modal content for the dress1 product */
+	  .modal100-content {
+	    background-color: #fefefe;
+		width: 30%;
+		border: 1px solid #888;
+		margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom 
+		and centered */
+	  }
+	  
+	  #dress1Image {
+	    
+	  }
+	  
+	</style>
+  </head>
+  
+  
+  <body>
+
+  
+  
+    <! Triggers the quick view modal for this product >
+	<button id = "modal100Button" onclick = "document.getElementById('modal100').style.display = 'block'">
+	<img id = "modal100Image" src = "blank.jpg" alt = "Quick View"></button>
+	
+	<! The modal for the image >
+    <div id = "modal100" class = "modal2">
+	  <! The content of the pop up >
+	  <div class = "modal100-content">
+	    <span class = "close" onclick = "document.getElementById('modal100').style.display = 'none'">&times;</span>
+        <p>Dress 1</p>
+	    <img src = "blank.jpg" id = "dress1Image">
+	    <p>$40</p>
+	  </div>
+    </div>
+  </body>
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

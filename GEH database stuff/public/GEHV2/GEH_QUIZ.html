@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta name = "author" content = "Michelle Le, Amy Balfour, Lucy Hu, Shinai Sorensen"/>
+	<meta charset = "UTF-8"/>
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+	
+	<title>Good Earth Hub</title>
+	
+	<! Links to the font>
+	<link rel = "stylesheet" href = "https://fonts.googleapis.com/css?family=Asap+Condensed">
+	
+	<! Links the CSS document for the format of the entire website >
+	<link rel = "stylesheet" type = "text/css" href = "Good Earth Hub CSS.css">
+	
+	<! Links the icons library>
+	<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  
+  <body>
+  <! Creates a button, when clicked the login popup appears>
+	<div class = "headerItems">
+      <span><a href = "/GEHV2/Good-Earth-Hub.html"><img id = "logo" src = "/GEHV2/GEH-New-Logo.png" alt = "Home"></a></span>
+	  <span id = "GEHheaderTitle">Good Earth Hub</span>
+	  <span><button onclick = "document.getElementById('logInPopUp').style.display = 'block'"
+	  class = "logInSignUp">Log In/Sign Up</button></span>
+	</div>
+	
+	<! The modal that contains the log in form>
+	<div id = "logInPopUp" class = "modal">
+	  <span onclick = "document.getElementById('logInPopUp').style.display = 'none'"
+      class = "close" title = "Close">&times;</span>
+      <form class = "modal-content">
+        <div class = "container">
+		  <h1 align = "center">Log In</h1>
+		  <hr>
+		  <label for = "username"><b>UserName</b></label>
+		  <input type = "text" placeholder = "Enter Username" name = "username"
+		  pattern = ".{6,}" title = "Must contain 6 or more characters" required>
+		  
+		  <label for = "password"><b>Password</b></label>
+		  <input type = "password" placeholder = "Enter Password" name = "password"
+		  pattern = "(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title = "Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" required>
+		  
+		  <! Creates a button that closes the log in pop up and shows the sign up pop up>
+		  <p align = "center">If you don't have an account, 
+		  <button type = "button" class = "signUp"
+		  onclick = "document.getElementById('signUpPopUp').style.display = 'block';
+		  document.getElementById('logInPopUp').style.display = 'none'">
+		  Sign Up here</button>!</p>
+		  <hr>
+		  
+		  <div class = "closeAll">
+		    <button type = "button" 
+			onclick = "document.getElementById('logInPopUp').style.display = 'none'"
+			class = "cancelButton">Cancel</button>
+			<button type = "submit" class = "logInButton">Log In</button>
+		  </div>
+		</div>
+      </form>
+    </div>
+	
+	<! The modal that contains the sign up form>
+    <div id = "signUpPopUp" class = "modal1">
+	  <span onclick = "document.getElementById('signUpPopUp').style.display = 'none'"
+      class = "close" title = "Close">&times;</span>
+	  <form class = "modal-content1">
+	    <div class = "container1">
+		  <h1 align = "center">Sign Up</h1>
+		  <hr>
+		  <label for = "username"><b>UserName</b></label>
+		  <input type = "text" placeholder = "Enter Username" name = "username"
+		  pattern = ".{6,}" title = "Must contain 6 or more characters" required>
+		  
+		  <label for = "password"><b>Password</b></label>
+		  <input type = "password" placeholder = "Enter Password" name = "password"
+		  pattern = "(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title = "Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" id = "password" required>
+		  
+		  <label for = "confirmPassword"><b>Confirm Password</b></label>
+		  <input type = "password" placeholder = "Confirm Password" 
+		  name = "confirmPassword" id = "confirmPassword"
+		  title = "Must be the same as your password" required>
+		  <hr>
+		  
+		  <div class = "closeAll1">
+		    <button type = "button" 
+			onclick = "document.getElementById('signUpPopUp').style.display = 'none';
+			document.getElementById('logInPopUp').style.display = 'block'"
+			class = "backButton">Back</button>
+			<button type = "submit" class = "signUpButton">Sign Up</button>
+		  </div>
+		</div>
+	  </form>
+    </div>
+	
+	<! Creates a search bar and search button >
+	<div class = "search_wrap">
+      <span><input type = "text" class = "searchTerm" 
+	  placeholder = "What are you looking for?"></span>
+      <span><button type = "submit" class = "searchButton"><i class = "fa fa-search"></i>
+	  </button></span>    
+    </div>
+	
+	<! Sets up a quiz for the user >
+    <div class = "quizContainer">
+	  <h1>Welcome to the Quiz!</h1>
+      <h3>For each question, select one or more options that appeal to you:</h3>
+      <form>
+        <p>What are you passionate about?<br><br>
+          <input type = "radio" name = "group1" value = "Vegan">Vegan
+          <input type = "radio" name = "group1" value = "Canadian">Made in Canada
+        </p>
+        <p>What style of dress do you prefer?<br><br>
+          <input type = "radio" name = "group2" value = "Casual">Casual
+          <input type = "radio" name = "group2" value = "Formal">Formal
+        </p>
+		<button type = "reset">Reset</button>
+	    <button type = "submit">Submit</button>
+      </form>
+	</div>
+	
+	<! Creates a footer with more links to Google (placeholder) >
+	<br><br><br><br><br><br><br>
+	<footer>
+      <span><a href = "https://www.google.ca">About Us</a></span>
+      <span><a href = "https://www.google.ca">Learn More About Ethical Trades</a></span>
+      <span><a href = "https://www.google.ca">Current Events</a></span>
+      <span><a href = "https://www.google.ca">Hot Topics</a></span>
+		</footer>
+		
+		
+  </body>
+</html>
