@@ -1,0 +1,71 @@
+ * {
+     margin: 0px auto;
+ }
+
+ #upButton {
+     position: fixed;
+     right: 30px;
+     bottom: 30px;
+     text-align: center;
+ }
+
+ #upButton > img {
+     width: 40px;
+ }
+
+ header {
+     text-align: center;
+     font-size: 30px;
+     padding: 20px;
+ }
+
+
+ #searchInput {
+     position: relative;
+     background-image: url('/searchicon.png');
+     background-position: 10px 10px;
+     background-repeat: no-repeat;
+     background-size: 25px;
+     width: 100%;
+     font-size: 16px;
+     padding: 12px 20px 12px 40px;
+     border: 1px solid #ddd;
+     margin: 12px;
+
+ }
+
+ form > div {
+     margin: 15px;
+ }
+
+ #results {
+     margin-left: auto;
+     margin-right: auto;
+     width: 60%;
+
+ }
+
+ #results > img {
+     width: 200px;
+     margin: 40px;
+
+ }
+ 
+ /*<! Button to click and go back to top of page-doesn't work yet >
+    <div id = 'upButton'>
+        <img src = "arrowUp.png" alt = "Go Back to Top">
+        <p>Back to top</p>
+    </div>*/
+	
+/*<! Shows the user products based on search or quiz results >
+    <div id='results'>
+	  <div>
+      <img class = "blank" src = "blank.jpg" alt = "blank">
+      <img class = "blank" src = "blank.jpg" alt = "blank">
+      <img class = "blank" src = "blank.jpg" alt = "blank">
+      <img class = "blank" src = "blank.jpg" alt = "blank">
+	  <img class = "blank" src = "blank.jpg" alt = "blank">
+	  <img class = "blank" src = "blank.jpg" alt = "blank">
+	  <img class = "blank" src = "blank.jpg" alt = "blank">
+	  <img class = "blank" src = "blank.jpg" alt = "blank">	
+    </div>*/

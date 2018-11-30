@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <style>
+        #logo {
+            float: left;
+            border-radius: 70%;
+        }
+        
+        #title {
+            text-align: center;
+            font-size: 36pt;
+            margin-right: 80px;
+        }
+
+        #login {
+            float: right;
+            margin-top: -100px;
+        }
+
+        #mission {
+            float: left;
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+
+        .search_bar {
+            width: 100%;
+            position: relative;
+        }
+
+        .searchTerm {
+            float: left;
+            width: 100%;
+            border: 3px solid black;
+            padding: 5px;
+            height: 20px;
+            border-radius: 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
+
+        .searchTerm:focus {
+            color: black;
+        }
+
+        .searchButton {
+            position: absolute;  
+            right: -50px;
+            width: 40px;
+            height: 36px;
+            border: 1px solid black;
+            background: black;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /*Resize the wrap to see the search bar change!*/
+        .search_wrap {
+            width: 40%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .quizButton {
+            position: relative;  
+            left: -50px;
+            bottom: 30px;
+            width: 340px;
+            height: 36px;
+            border: 1px solid black;
+            background: black;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .quiz {
+            width: 30%;
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-20%, 50%);
+        }
+
+         .slider {
+            padding: 5px;
+         }
+
+        .gallery {
+            position: relative;
+            padding-top: 5px;
+            top: 250px;
+            right: 57%;
+            transform: translate(55%, 50%);
+            display: flex;            
+            align-items: center;
+        }        
+
+
+        footer {
+            position: absolute;
+            float: none;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: 0;
+        }
+
+    </style>
+  </head>
+</html>

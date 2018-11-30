@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="author" content="Michelle Le, Amy Balfour, Lucy Hu, Shinai Sorensen" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0">
+	<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>src="https://cdnjs.cloudflare.com/ajax/libs/d3-array/1.2.2/d3-array.js"</script>
+	<script>
+		// Initialize Firebase !!! replace this with actual apiKey info for GEH
+		var config = {
+			apiKey: "AIzaSyBsGMcnAyAYc_yUx8wTJBj446ysXnRBNcY",
+			authDomain: "nov01-comp-1930.firebaseapp.com",
+			databaseURL: "https://nov01-comp-1930.firebaseio.com",
+			projectId: "nov01-comp-1930",
+			storageBucket: "nov01-comp-1930.appspot.com",
+			messagingSenderId: "615390659178"
+		};
+
+		//the database is created below
+		firebase.initializeApp(config);
+
+	</script>
+
+	<title>Good Earth Hub</title>
+
+	<! Links to the font>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap+Condensed">
+
+	<! Links the CSS document for the format of the entire website >
+	<link rel="stylesheet" type="text/css" href="Good Earth Hub CSS.css">
+
+	<! Links the icons library>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<! Creates a button, when clicked the login popup appears>
+	<div class="headerItems">
+		<span><a href="Good-Earth-Hub.html"><img id="logo" src="GEH-New-Logo.png" alt="Home"></a></span>
+		<span id="GEHheaderTitle">Good Earth Hub</span>
+		<span><a href="GEH_QUIZ.html" target="_self">
+				<button type="button" class="quizButton">Take the quiz!</button></a>
+			<button onclick="document.getElementById('logInPopUp').style.display = 'block'" class="logInSignUp">Log In/Sign Up</button></span>
+	</div>
+
+	<! The modal that contains the log in form>
+	<div id="logInPopUp" class="modal">
+		<span onclick="document.getElementById('logInPopUp').style.display = 'none'" class="close" title="Close">&times;</span>
+		<form class="modal-content">
+			<div class="container">
+				<h1 align="center">Log In</h1>
+				<hr>
+				<label for="username"><b>UserName</b></label>
+				<input type="text" placeholder="Enter Username" name="username" pattern=".{6,}" title="Must contain 6 or more characters" required>
+
+				<label for="password"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="password" pattern="(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title="Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" required>
+
+				<! Creates a button that closes the log in pop up and shows the sign up pop up>
+				<p align="center">If you don't have an account,
+					<button type="button" class="signUp" onclick="document.getElementById('signUpPopUp').style.display = 'block';
+		  document.getElementById('logInPopUp').style.display = 'none'">
+						Sign Up here</button>!</p>
+				<hr>
+
+				<div class="closeAll">
+					<button type="button" onclick="document.getElementById('logInPopUp').style.display = 'none'" class="cancelButton">Cancel</button>
+					<button type="submit" class="logInButton">Log In</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<! The modal that contains the sign up form>
+	<div id="signUpPopUp" class="modal1">
+		<span onclick="document.getElementById('signUpPopUp').style.display = 'none'" class="close" title="Close">&times;</span>
+		<form class="modal-content1">
+			<div class="container1">
+				<h1 align="center">Sign Up</h1>
+				<hr>
+				<label for="username"><b>UserName</b></label>
+				<input type="text" placeholder="Enter Username" name="username" pattern=".{6,}" title="Must contain 6 or more characters" required>
+
+				<label for="password"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="password" pattern="(? = .*\d)(? = .*[a-z])(? = .[A-Z]).{8,}" title="Must
+		  contain at least one number, one lowercase and one uppercase letter,
+		  and at least 8 or more characters" id="password" required>
+
+				<label for="confirmPassword"><b>Confirm Password</b></label>
+				<input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" title="Must be the same as your password" required>
+				<hr>
+
+				<div class="closeAll1">
+					<button type="button" onclick="document.getElementById('signUpPopUp').style.display = 'none';
+			document.getElementById('logInPopUp').style.display = 'block'" class="backButton">Back</button>
+					<button type="submit" class="signUpButton">Sign Up</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<! Creates a search bar and search button >
+	<div class="search_wrap">
+		<! !!! added id="searchText" for input >
+		<span>
+			<input type="text" class="searchTerm" id="searchText" placeholder="What are you looking for?">
+			<button type="submit" class="searchButton" id="searchSubmit" onclick="search(dataArray)"><i class="fa fa-search"></i>
+			</button>
+		</span>
+<!--
+		<! !!! added id="searchSubmit" for submit and id="spanSeach">
+		<span id="spanSearch"></span>
+-->
+	</div>
+
+	<! Header for the search results page >
+	<div>
+		<h1 align="center" id="searchResults">Search Results</h1>
+
+		<! Sets up a side bar to filter search results >
+		<!!! moved the advanced search functions into the save div as search results>
+		<div class="advancedSearch">
+			<form>
+
+				<! Lets the user sort by newest and price >
+				<div id="sortNewPrice">
+					<h3>Sort by:</h3>
+					<select size="1" name="Sort by" id="sort">
+						<option value='alpha'>A-Z</option>
+						<option value='lowToHigh'>Price: Low to High</option>
+						<option value='highToLow'>Price: High to Low</option>
+					</select>
+				</div>
+
+				<! Lets user pick from quiz options >
+				<div class="filterOptions">
+					<h3>More Options</h3>
+
+					<! !!! added ids for each of the 4 checkboxes below >
+					<input type="checkbox" name="group1" value="Vegan" id="veganOption">Vegan
+					<input type="checkbox" name="group1" value="Canadian" id="canadianOption">Made in Canada
+					<br>
+					<input type="checkbox" name="group2" value="Casual" id="casualOption">Casual
+					<input type="checkbox" name="group2" value="Formal" id="formalOption">Formal
+				</div>
+				<br><br>
+
+				<! Lets the user hit a button to filter or reset results >
+				<div>
+					<! !!! added id and onclick function to filter so filter and search runs after click>
+					<! !!! also changed type from submit to button cuz it was having issues with onclick>
+					<button id="filterButton" type="button" onclick="search(dataArray)">Filter</button>
+					<button type="reset">Reset</button>
+					<br>
+				</div>
+			</form>
+		</div>
+
+		<! !!! added this div for the results using DOM >
+		<div id="resultCards"></div>
+
+	</div>
+
+
+	<br><br><br><br><br><br><br>
+
+	<! Creates a footer with more links to Google (placeholder) >
+	<footer>
+		<span><a href="https://www.google.ca">About Us</a></span>
+		<span><a href="https://www.google.ca">Learn More About Ethical Trades</a></span>
+		<span><a href="https://www.google.ca">Current Events</a></span>
+		<span><a href="https://www.google.ca">Hot Topics</a></span>
+	</footer>
+
+
+
+
+	<script>
+		// !!! all new until the end of the page (Nov 21 LH)
+		$(document).ready(setPrefs());
+
+		// this is for the quiz results
+		function setPrefs() {
+			let windowURL = window.location.href;
+			let url = new URL(windowURL);
+			let sty = url.searchParams.get("sty");
+			let pas = url.searchParams.get("pas");
+
+			if (sty) {
+				switch (sty) {
+					case "Casual":
+						$('#casualOption').prop('checked', true);
+						break;
+					case "Formal":
+						$('#formalOption').prop('checked', true);
+						break;
+				}
+			}
+
+			if (pas) {
+				switch (pas) {
+					case "Vegan":
+						$('#veganOption').prop('checked', true);
+						break;
+					case "Canadian":
+						$('#canadianOption').prop('checked', true);
+						break;
+				}
+			}
+
+		}
+
+		// allows search to happen after pressing enter key
+		var input = document.getElementById("searchText");
+		input.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("searchSubmit").click();
+			}
+		});
+
+		// data stuff
+		var data;
+		var dataArray;
+		var currentSearchArray = new Array();
+
+		// takes snapshot of database 
+		firebase.database().ref().on("value", function(snapshot) {
+			data = snapshot.val();
+			console.log(data);
+			main();
+		}, function(error) {
+			console.log("Error: " + error.code);
+		});
+
+		// looks through the database for searched words
+		function find(arrayIn) {
+			rawText = document.getElementById("searchText").value;
+			searchText = rawText.trim().toLowerCase();
+			console.log(searchText);
+			var result = new Array();
+			console.log('searching for ' + searchText);
+
+			for (var bob in arrayIn) {
+				console.log(arrayIn[bob].name);
+
+				var matches = arrayIn[bob].name.indexOf(searchText) >= 0 ? true : false;
+				if (matches) {
+					console.log("adding " + arrayIn[bob].name);
+					result.push(arrayIn[bob]);
+				}
+			}
+			console.log(result);
+			return result;
+		}
+
+		// sorting function
+		function sort(arrayIn) {
+			var result = arrayIn;
+
+			var sortType = $("#sort")[0].value;
+
+			console.log(sortType);
+
+			switch (sortType) {
+				case "alpha":
+					result.sort(function(a, b) {
+						return a.name.localeCompare(b.name);
+					});
+					break;
+				case "lowToHigh":
+					result.sort(function(a, b) {
+						return a.price - b.price;
+					});
+					break;
+				case "highToLow":
+					result.sort(function(a, b) {
+						return b.price - a.price;
+					});
+					break;
+			}
+
+			return result;
+		}
+
+		// filtering function
+		function filter(arrayIn) {
+			var result = arrayIn;
+
+			//get checkbox values
+			var isVegan = $("#veganOption")[0].checked;
+			var isCanadian = $("#canadianOption")[0].checked;
+			var isCasual = $("#casualOption")[0].checked;
+			var isFormal = $("#formalOption")[0].checked;
+
+
+
+			//run filter checks
+
+			if (isVegan) {
+				result = result.filter(function(bob) {
+					//					console.log(bob);
+					return bob.vegan;
+				});
+			}
+
+			if (isCanadian) {
+				result = result.filter(function(bob) {
+					return bob.canadian;
+				});
+			}
+
+			if (isCasual) {
+				result = result.filter(function(bob) {
+					return bob.casual;
+				});
+			}
+
+			if (isFormal) {
+				result = result.filter(function(bob) {
+					return bob.formal;
+				});
+			}
+
+			console.log(result);
+			return result;
+		}
+
+		// puts all the sorts and filter results together
+		function search(arrayIn) {
+			var searchedArray = find(arrayIn);
+			var filteredArray = filter(searchedArray);
+			var sortedArray = sort(filteredArray);
+			console.log(sortedArray);
+			$('#resultCards')[0].innerHTML = "";
+			currentSearchArray = sortedArray;
+			toDisplay(sortedArray);
+
+		}
+
+
+
+		// initialization function
+		function main() {
+			collection = data['Collections']['allClothing'];
+			dataArray = Object.keys(collection).map(i => collection[i]);
+			console.log("test");
+			console.log(dataArray);
+
+			search(dataArray);
+
+		}
+
+		// the above code searches, filters, sorts the firebase items into an array. 
+		// The below functions take each item
+		// in the array and makes it into html elements 
+		function toDisplay(displayArray) {
+			for (var tempItem in displayArray) {
+				console.log(tempItem);
+				generateCard(displayArray[tempItem], tempItem);
+			}
+		}
+
+		function generateCard(tempItem, itemIndex) {
+
+			let bigButton = $('<button onclick = "generateModal(' + itemIndex + ')"></button>');
+
+			let card = $('<div class = "card" id = "' + tempItem.name + '_card"></div>');
+			let name = $('<p class = "quickViewStyle">' + tempItem.name + '</p>');
+			let price = $('<p class = "quickViewStyle">' + tempItem.price + '</p>');
+			let image = $('<img src = "' + tempItem.imageurl + '" alt = "Quick View">');
+
+			bigButton.append(name, price, image);
+			card.append(bigButton);
+
+			$('#resultCards').append(card);
+
+		}
+
+		// !!! script for making the modal pop up when item is clicked
+		function generateModal(item) {
+
+			let modalDivDiv = $('<div class="modalSearch"></div>');
+			let modalDiv = $('<div class = "modal100-content"></div>');
+			let closeModal = $('<span class = "close" onclick = "removeModal()">&times;</span>');
+
+			let nameModal = $('<p class = "quickViewStyle">' + currentSearchArray[item].name + '</p>');
+			let priceModal = $('<p class = "quickViewStyle">' + currentSearchArray[item].price + '</p>');
+			let imageModal = $('<p class = "quickViewStyle"><img src = "' + currentSearchArray[item].imageurl + '" alt = "Quick View"></p>');
+			let companySite = $('<a href = "' + currentSearchArray[item].company + '" target = "_blank"  class = "quickViewStyle">View on Company Website</a>');
+
+			modalDiv.append(closeModal, nameModal, priceModal, imageModal, companySite);
+			modalDivDiv.append(modalDiv);
+			$('#resultCards').append(modalDivDiv);
+
+		}
+
+
+		//		Function to remove the modal
+		function removeModal() {
+			$('div.modalSearch').remove();
+		}
+
+	</script>
+</body>
+
+</html>
